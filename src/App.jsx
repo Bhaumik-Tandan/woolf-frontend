@@ -69,7 +69,9 @@ function App() {
             />
           </div>
           
-          {fileError && <ErrorMessage message={fileError} />}
+          <div className="mb-6">
+            {fileError && <ErrorMessage title="File Error" message={fileError} onDismiss={() => setApiError(null)} />}
+          </div>
 
           <div className="flex items-center justify-center space-x-4">
             <Button
@@ -90,8 +92,8 @@ function App() {
           </div>
         </form>
 
-        {loading && <div className="mt-6"><LoadingSpinner /></div>}
-        {apiError && <div className="mt-6"><ErrorMessage message={apiError} onDismiss={() => setApiError(null)} /></div>}
+        {loading && <div className="mt-6"><LoadingSpinner text="Analyzing documents, please wait..."/></div>}
+        {apiError && <div className="mt-6"><ErrorMessage title="Analysis Failed" message={apiError} onDismiss={() => setApiError(null)} /></div>}
         {results && <div className="mt-8"><ResultsDisplay data={results} /></div>}
        
       </main> 
