@@ -9,12 +9,8 @@ import Button from './components/Button';
 import LoadingSpinner from './components/LoadingSpinner';
 import ErrorMessage from './components/ErrorMessage';
 
-// Hooks and Services
 import { useFileUpload } from './hooks/useFileUpload';
 import { ApiService } from './services/apiService';
-
-// Styles
-import './App.css';
 
 function App() {
   const { files, error: fileError, handleFileChange, resetFiles, isValid } = useFileUpload();
@@ -61,7 +57,8 @@ function App() {
         {loading && <LoadingSpinner />}
         {apiError && <ErrorMessage message={apiError} onDismiss={() => setApiError(null)} />}
         {results && <ResultsDisplay data={results} />}
-      </main>
+       
+      </main> 
       <Footer />
     </div>
   );

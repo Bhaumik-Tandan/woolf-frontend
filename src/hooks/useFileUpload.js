@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ACCEPTED_FILE_TYPE, MAX_FILE_SIZE } from '../utils/constants';
-
 export const useFileUpload = () => {
   const [files, setFiles] = useState({ pdf1: null, pdf2: null });
   const [error, setError] = useState(null);

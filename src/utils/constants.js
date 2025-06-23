@@ -1,4 +1,4 @@
-export const API_BASE_URL = process.env.REACT_APP_API_URL;
+export const API_BASE_URL = import.meta.env.VITE_API_URL;
 export const UPLOAD_ENDPOINT = '/upload';
 export const ACCEPTED_FILE_TYPE = 'application/pdf';
 export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
