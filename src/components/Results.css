@@ -1,0 +1,75 @@
+.results-container {
+  @apply space-y-6;
+}
+
+.overall-summary {
+  @apply bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white;
+}
+
+.summary-header {
+  @apply flex items-center justify-between;
+}
+
+.overall-score {
+  @apply text-center;
+}
+
+.score-label {
+  @apply block text-sm text-blue-100;
+}
+
+.score-value {
+  @apply text-3xl font-bold;
+}
+
+.score-cards-grid {
+  @apply grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3;
+}
+
+.detailed-analysis {
+  @apply bg-white rounded-lg shadow-md p-6;
+}
+
+.analysis-header {
+  @apply flex items-center space-x-2 mb-3;
+}
+
+.analysis-content {
+  @apply border-l-4 border-blue-200 pl-4;
+}
+
+.insights-section {
+  @apply bg-white rounded-lg shadow-md p-6;
+}
+
+.insights-grid {
+  @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+}
+
+.insight-card {
+  @apply bg-gray-50 rounded-lg p-4 border-l-4 border-gray-300;
+}
+
+.raw-data-section {
+  @apply bg-white rounded-lg shadow-md overflow-hidden;
+}
+
+.raw-data-toggle {
+  @apply w-full flex items-center justify-between p-4 text-left text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors;
+}
+
+.raw-data-content {
+  @apply p-4 border-t border-gray-200;
+}
+
+.raw-data-text {
+  @apply text-xs text-gray-600 overflow-auto max-h-60 whitespace-pre-wrap bg-gray-50 p-3 rounded;
+}
+
+.action-buttons {
+  @apply flex justify-center pt-4;
+}
+
+.reset-button {
+  @apply bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors;
+}
