@@ -32,11 +32,16 @@ export const useFileUpload = () => {
     setError(null);
   };
 
+  const resetFile = (fileType) => {
+    setFiles(prev => ({ ...prev, [fileType]: null }));
+  };
+
   return {
     files,
     error,
     handleFileChange,
     resetFiles,
+    resetFile,
     isValid: files.pdf1 && files.pdf2
   };
 };

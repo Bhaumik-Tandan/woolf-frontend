@@ -1,8 +1,7 @@
 import React from 'react';
-import { Upload, CheckCircle, FileText } from 'lucide-react';
-import './FileUploadArea.css';
+import { Upload, CheckCircle, FileText, X } from 'lucide-react';
 
-const FileUploadArea = ({ fileType, label, file, onFileChange, disabled = false }) => {
+const FileUploadArea = ({ fileType, label, file, onFileChange, onReset, disabled = false }) => {
   const handleFileSelect = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile && onFileChange) {
@@ -19,7 +18,7 @@ const FileUploadArea = ({ fileType, label, file, onFileChange, disabled = false 
   };
 
   return (
-    <div className={`file-upload-area ${disabled ? 'disabled' : ''}`}>
+    <div className={`relative border-2 border-dashed rounded-lg p-6 text-center transition-colors duration-200 ${disabled ? 'bg-gray-200 cursor-not-allowed' : 'border-gray-300 hover:border-blue-500 bg-white'}`}>
       <input
         type="file"
         id={fileType}
@@ -28,25 +27,33 @@ const FileUploadArea = ({ fileType, label, file, onFileChange, disabled = false 
         disabled={disabled}
         className="hidden"
       />
-      <label htmlFor={fileType} className={`upload-label ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-        <div className="upload-content">
-          {file ? (
-            <>
-              <CheckCircle className="w-8 h-8 text-green-500 mb-2" />
-              <div className="file-info">
-                <p className="file-name">{file.name}</p>
-                <p className="file-size">{formatFileSize(file.size)}</p>
-              </div>
-              <p className="upload-hint success">✓ Ready to analyze</p>
-            </>
-          ) : (
-            <>
-              <FileText className="w-8 h-8 text-gray-400 mb-2" />
-              <p className="upload-text">Upload {label}</p>
-              <p className="upload-hint">Click to browse PDF files</p>
-            </>
-          )}
-        </div>
+      <label htmlFor={fileType} className={`flex flex-col items-center justify-center w-full h-full ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+        {file ? (
+          <div className="flex flex-col items-center">
+            <CheckCircle className="w-12 h-12 text-green-500 mb-3" />
+            <p className="font-semibold text-gray-700">{label}</p>
+            <p className="text-sm text-gray-500 truncate max-w-full">{file.name}</p>
+            <p className="text-xs text-gray-400">{formatFileSize(file.size)}</p>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onReset(fileType);
+              }}
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+              aria-label="Remove file"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center">
+            <Upload className="w-12 h-12 text-gray-400 mb-3" />
+            <p className="font-semibold text-gray-700">{label}</p>
+            <p className="text-sm text-gray-500">Click to upload a PDF file</p>
+            <p className="text-xs text-gray-400 mt-1">Max file size: 10MB</p>
+          </div>
+        )}
       </label>
     </div>
   );
