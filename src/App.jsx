@@ -32,7 +32,7 @@ function App() {
     setShowForm(false); // Hide form when analysis starts
     try {
       const response = await ApiService.uploadPDFs(files.pdf1, files.pdf2);
-      setResults(response.data);
+      setResults(response);
     } catch (error) {
       setApiError(error.message || 'Failed to analyze files. Please try again.');
       console.error('API Error:', error);
