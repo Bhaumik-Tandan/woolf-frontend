@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/vite": "^4.1.10",
     "@testing-library/dom": "^10.4.0",
+    "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
     "lucide-react": "^0.522.0",
     "react": "^19.1.0",
