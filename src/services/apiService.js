@@ -1,4 +1,4 @@
-// import { API_BASE_URL, UPLOAD_ENDPOINT } from '../utils/constants';
+import { API_BASE_URL, UPLOAD_ENDPOINT } from '../utils/constants';
 
 export class ApiService {
   static async uploadPDFs(pdf1, pdf2) {

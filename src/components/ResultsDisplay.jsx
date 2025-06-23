@@ -1,139 +1,60 @@
 import React, { useState } from 'react';
-import { Target, TrendingUp, AlertTriangle, FileText, ChevronDown, ChevronUp } from 'lucide-react';
+import { Target, TrendingUp, AlertTriangle } from 'lucide-react';
 import ScoreCard from './ScoreCard';
 import './Results.css';
 
 const ResultsDisplay = ({ results, onReset }) => {
   const [showRawData, setShowRawData] = useState(false);
 
-  if (!results) return null;
+  if (!results) return <h1>Please try again</h1>;
 
-  const getOverallRating = () => {
-    const scores = [
-      results.overallAlignment?.score,
-      results.strengths?.score,
-      results.weaknesses?.score
-    ].filter(score => score !== undefined);
-
-    if (scores.length === 0) return 0;
-    
-    const average = scores.reduce((sum, score) => sum + score, 0) / scores.length;
-    return Math.round(average * 10) / 10;
-  };
-
-  const overallRating = getOverallRating();
+  // Use alignment.score for overall rating
+  const overallRating = results.alignment?.score ?? 0;
 
   return (
     <div className="results-container">
       {/* Overall Summary */}
-      <div className="overall-summary">
-        <div className="summary-header">
-          <h2 className="text-2xl font-bold text-gray-900">Analysis Complete</h2>
-          <div className="overall-score">
-            <span className="score-label">Overall Match</span>
-            <span className="score-value">{overallRating}/10</span>
+      <div className="overall-summary rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-center justify-between mb-8 bg-gradient-to-br from-blue-600 via-purple-500 to-indigo-600">
+        <div className="flex items-center space-x-4">
+          <Target className="w-12 h-12 text-white bg-blue-700 rounded-full p-2 shadow-md" />
+          <div>
+            <h2 className="text-3xl font-extrabold text-white mb-1">Job Alignment</h2>
+            <p className="text-blue-100 text-lg font-medium">{results.alignment?.reason}</p>
           </div>
+        </div>
+        <div className="flex flex-col items-center mt-6 md:mt-0">
+          <span className="text-blue-100 text-sm">Overall Match</span>
+          <span className="text-5xl font-black text-white drop-shadow-lg">{overallRating}/10</span>
         </div>
       </div>
 
-      {/* Score Cards */}
-      <div className="score-cards-grid">
-        {results.overallAlignment && (
-          <ScoreCard
-            title="Job Alignment"
-            score={results.overallAlignment.score}
-            reason={results.overallAlignment.reason}
-            color="#3B82F6"
-            icon={Target}
-          />
-        )}
-
-        {results.strengths && (
-          <ScoreCard
-            title="Candidate Strengths"
-            score={results.strengths.score}
-            reason={results.strengths.reason}
-            color="#10B981"
-            icon={TrendingUp}
-          />
-        )}
-
-        {results.weaknesses && (
-          <ScoreCard
-            title="Areas for Improvement"
-            score={results.weaknesses.score}
-            reason={results.weaknesses.reason}
-            color="#F59E0B"
-            icon={AlertTriangle}
-          />
-        )}
-      </div>
-
-      {/* Detailed Analysis */}
-      {results.analysis && (
+      {/* Strengths List */}
+      {Array.isArray(results.strengths) && results.strengths.length > 0 && (
         <div className="detailed-analysis">
           <div className="analysis-header">
-            <FileText className="w-5 h-5 text-gray-600" />
-            <h3 className="text-lg font-semibold text-gray-800">Detailed Analysis</h3>
+            <TrendingUp className="w-5 h-5 text-green-500" />
+            <h3 className="text-lg font-semibold text-gray-800">Candidate Strengths</h3>
           </div>
-          <div className="analysis-content">
-            <p className="text-gray-600 leading-relaxed">{results.analysis}</p>
-          </div>
+          <ul className="list-disc pl-6 text-gray-700">
+            {results.strengths.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
         </div>
       )}
 
-      {/* Additional Insights */}
-      {(results.recommendations || results.keySkills || results.missingSkills) && (
-        <div className="insights-section">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Additional Insights</h3>
-          
-          <div className="insights-grid">
-            {results.recommendations && (
-              <div className="insight-card">
-                <h4 className="font-medium text-gray-700 mb-2">Recommendations</h4>
-                <p className="text-sm text-gray-600">{results.recommendations}</p>
-              </div>
-            )}
-            
-            {results.keySkills && (
-              <div className="insight-card">
-                <h4 className="font-medium text-gray-700 mb-2">Key Skills Identified</h4>
-                <p className="text-sm text-gray-600">{results.keySkills}</p>
-              </div>
-            )}
-            
-            {results.missingSkills && (
-              <div className="insight-card">
-                <h4 className="font-medium text-gray-700 mb-2">Skills Gap</h4>
-                <p className="text-sm text-gray-600">{results.missingSkills}</p>
-              </div>
-            )}
+      {/* Weaknesses List */}
+      {Array.isArray(results.weaknesses) && results.weaknesses.length > 0 && (
+        <div className="detailed-analysis">
+          <div className="analysis-header">
+            <AlertTriangle className="w-5 h-5 text-yellow-500" />
+            <h3 className="text-lg font-semibold text-gray-800">Areas for Improvement</h3>
           </div>
-        </div>
-      )}
-
-      {/* Raw Data Toggle */}
-      {results.rawResponse && (
-        <div className="raw-data-section">
-          <button
-            onClick={() => setShowRawData(!showRawData)}
-            className="raw-data-toggle"
-          >
-            <span>View Raw Response</span>
-            {showRawData ? (
-              <ChevronUp className="w-4 h-4" />
-            ) : (
-              <ChevronDown className="w-4 h-4" />
-            )}
-          </button>
-          
-          {showRawData && (
-            <div className="raw-data-content">
-              <pre className="raw-data-text">
-                {JSON.stringify(results.rawResponse, null, 2)}
-              </pre>
-            </div>
-          )}
+          <ul className="list-disc pl-6 text-gray-700">
+            {results.weaknesses.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
         </div>
       )}
 
