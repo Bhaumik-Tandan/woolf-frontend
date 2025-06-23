@@ -4,11 +4,8 @@ This is the frontend for the AI PDF Analyzer application. It's built with React 
 
 ## Demo Video
 
-Watch a quick demo of the application on Loom:
 
-[![Watch the demo](https://cdn.loom.com/sessions/thumbnails/4305e4ea0e3f4fdbb1ad0651b3a6e851-with-play.png)](https://www.loom.com/share/4305e4ea0e3f4fdbb1ad0651b3a6e851?sid=dbea934b-8007-4863-9fdf-d59161ea218e)
-
-Or open directly: [Loom Demo](https://www.loom.com/share/4305e4ea0e3f4fdbb1ad0651b3a6e851?sid=dbea934b-8007-4863-9fdf-d59161ea218e)
+ [Loom Demo](https://www.loom.com/share/4305e4ea0e3f4fdbb1ad0651b3a6e851?sid=dbea934b-8007-4863-9fdf-d59161ea218e)
 
 ## Features
 
