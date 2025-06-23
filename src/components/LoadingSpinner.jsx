@@ -1,4 +1,4 @@
-// LoadingSpinner.jsx
+import { Loader2 } from "lucide-react";
 const LoadingSpinner = ({ size = 'md', text = 'Loading...', className = '' }) => {
   const sizes = {
     sm: 'w-4 h-4',
@@ -7,10 +7,13 @@ const LoadingSpinner = ({ size = 'md', text = 'Loading...', className = '' }) =>
     xl: 'w-16 h-16'
   };
 
-  return (
+return (
     <div className={`flex flex-col items-center justify-center space-y-2 ${className}`}>
       <Loader2 className={`${sizes[size]} animate-spin text-blue-600`} />
       {text && <p className="text-sm text-gray-600">{text}</p>}
     </div>
   );
 };
+
+
+export default LoadingSpinner;

@@ -1,4 +1,6 @@
 
+import React from 'react';
+import { FileText, Brain, Zap } from 'lucide-react';
 const Header = () => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">

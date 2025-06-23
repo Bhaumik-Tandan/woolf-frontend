@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { BarChart3 } from 'lucide-react';
 
-// Components
-import { Header, Footer } from './components/Layout';
-import FileUploadArea from './components/FileUpload/FileUploadArea';
-import ResultsDisplay from './components/Results/ResultsDisplay';
-import { Button, LoadingSpinner, ErrorMessage } from './components/UI';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import FileUploadArea from './components/FileUploadArea';
+import ResultsDisplay from './components/ResultsDisplay';
+import Button from './components/Button';
+import LoadingSpinner from './components/LoadingSpinner';
+import ErrorMessage from './components/ErrorMessage';
 
 // Hooks and Services
 import { useFileUpload } from './hooks/useFileUpload';
